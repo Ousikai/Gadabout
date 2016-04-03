@@ -47,7 +47,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         //Button
-        final Button button = (Button) findViewById(R.id.button1);
+        final Button button = (Button) findViewById(R.id.button_clue);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 addMark();

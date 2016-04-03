@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="20"
-        android:inputType="text" >
+        android:inputType="textMultiLine"
+        >
     </EditText>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,14 +23,25 @@
         tools:context="com.treasurehunt.dinobros.treasurehunt.MapsActivity"
         tools:layout="@layout/activity_maps" />
 
-    <Button
-        android:id="@+id/button1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="10"
-        android:text="Submit Clue!"
-        android:onClick="amToast"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_clue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Create Clue" />
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Submit Map" />
+    </LinearLayout>
 
 </LinearLayout>
 
