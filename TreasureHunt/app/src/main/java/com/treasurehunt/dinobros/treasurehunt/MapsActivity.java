@@ -1,5 +1,6 @@
 package com.treasurehunt.dinobros.treasurehunt;
 
+import android.content.Context;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -25,6 +26,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // GoogleMap Object
     private GoogleMap mMap;
 
+    // Clue Management Variables
+    int clue_counter = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,36 +53,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        // Initialize Google Map according to user current location
         enableMyLocation();
         initializeMap();
 
-        Toast.makeText(this, "Mom's spaghetti", Toast.LENGTH_SHORT).show();
+        //Create Clues
+        newClue();
 
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         } else {
-            // Show rationale and request permission.
+            // but why doe
         }
     }
 
-    public void initializeMap(){
+    public void initializeMap() {
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(currentLocation).title("Marker in Sydney"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom((currentLocation),
+                        18.0f));
             }
         });
 
     }
+
+    public void newClue(){
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng position) {
+                String clue_name = "Clue number " + clue_counter;
+                clue_counter++;
+                mMap.addMarker(new MarkerOptions().position(position).title(clue_name));
+                Context context = getApplicationContext();
+                Toast.makeText(context, position.latitude + " : " + position.longitude, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void pingCurrentLocation(){
+
+    }
+
+    //Toast.makeText(this, "Mom's spaghetti", Toast.LENGTH_SHORT).show();
+    //LatLng sydney = new LatLng(-34, 151);
+    //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+    //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
 }
 
