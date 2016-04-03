@@ -27,7 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="10"
-        android:text="Submit Clue!" />
+        android:text="Submit Clue!"
+        android:onClick="amToast"
+        />
 
 </LinearLayout>
 

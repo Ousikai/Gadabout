@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
 import android.Manifest;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import android.content.pm.PackageManager;
 
@@ -16,6 +18,8 @@ import android.support.v4.content.ContextCompat;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
@@ -29,6 +33,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Clue Management Variables
     int clue_counter = 1;
 
+    private double[] curPos = {0,0};
+    private ArrayList<LatLng> allPos = new ArrayList<LatLng>();
+    private MarkerOptions options = new MarkerOptions();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //Button
+        final Button button = (Button) findViewById(R.id.button1);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                addMark();
+            }
+        });
+
     }
 
 
@@ -86,17 +103,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng position) {
+                mMap.clear();
+                addAll();
                 String clue_name = "Clue number " + clue_counter;
                 clue_counter++;
                 mMap.addMarker(new MarkerOptions().position(position).title(clue_name));
                 Context context = getApplicationContext();
                 Toast.makeText(context, position.latitude + " : " + position.longitude, Toast.LENGTH_SHORT).show();
+                curPos[0] = position.latitude;
+                curPos[1] = position.longitude;
             }
         });
     }
 
     public void pingCurrentLocation(){
 
+    }
+
+    public void addMark(){
+        allPos.add(new LatLng(curPos[0], curPos[1]));
+        mMap.clear();
+        addAll();
+
+    }
+
+    public void addAll(){
+        for (LatLng point : allPos) {
+            options.position(point);
+            options.title("");
+            options.snippet("");
+            mMap.addMarker(options);
+        }
+    }
+
+    public void testToast(){
+        Toast.makeText(this, "Mom's spaghetti", Toast.LENGTH_SHORT).show();
     }
 
     //Toast.makeText(this, "Mom's spaghetti", Toast.LENGTH_SHORT).show();
