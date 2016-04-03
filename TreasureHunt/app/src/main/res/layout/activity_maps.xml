@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/clue_info"
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="20"

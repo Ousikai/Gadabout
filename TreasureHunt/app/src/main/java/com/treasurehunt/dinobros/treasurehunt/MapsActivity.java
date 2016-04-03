@@ -6,8 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
 import android.Manifest;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import android.content.pm.PackageManager;
 
@@ -16,9 +18,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import android.support.v4.content.ContextCompat;
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
@@ -37,6 +42,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<LatLng> allPos = new ArrayList<LatLng>();
     private MarkerOptions options = new MarkerOptions();
 
+    String data1 = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +53,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //Button
-        final Button button = (Button) findViewById(R.id.button_clue);
-        button.setOnClickListener(new View.OnClickListener() {
+        //Button for creating clues
+        final Button button_clue = (Button) findViewById(R.id.button_clue);
+        button_clue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 addMark();
+            }
+        });
+
+        //Button for finalizing map
+        final Button button_submit = (Button) findViewById(R.id.button_submit);
+        button_submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                writeToFile(data1);
+                mMap.clear();
             }
         });
 
@@ -107,7 +123,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 addAll();
                 String clue_name = "Clue number " + clue_counter;
                 clue_counter++;
-                mMap.addMarker(new MarkerOptions().position(position).title(clue_name));
+                mMap.addMarker(new MarkerOptions().
+                        position(position).
+                        title(clue_name).
+                        alpha(0.7f).
+                        icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                 Context context = getApplicationContext();
                 Toast.makeText(context, position.latitude + " : " + position.longitude, Toast.LENGTH_SHORT).show();
                 curPos[0] = position.latitude;
@@ -117,11 +137,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void pingCurrentLocation(){
-
+        //Currently pending
     }
 
     public void addMark(){
         allPos.add(new LatLng(curPos[0], curPos[1]));
+        EditText txt   = (EditText)findViewById(R.id.clue_info);
+        data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
         mMap.clear();
         addAll();
 
@@ -132,12 +154,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             options.position(point);
             options.title("");
             options.snippet("");
+            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
             mMap.addMarker(options);
         }
     }
 
     public void testToast(){
         Toast.makeText(this, "Mom's spaghetti", Toast.LENGTH_SHORT).show();
+    }
+
+    private void writeToFile(String data) {
+        try {
+            Context context = getApplicationContext();
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("map.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 
     //Toast.makeText(this, "Mom's spaghetti", Toast.LENGTH_SHORT).show();
