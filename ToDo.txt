@@ -1,0 +1,9 @@
+-Data lost when tilted, for now disable tilting
+
+-"Sheriff. Database (plz)"
+-Flight for DB (JSON?)
+	->UNZIP at public_html
+-how tf do you use DB
+	-> Key-Value Dictionary -> Title, Description, x-coor, y-coor (BUT WHAT ABOUT ALL THE CLUES)
+-plato.cs.virginia.edu/~oks2vd
+
