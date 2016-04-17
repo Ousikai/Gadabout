@@ -3,6 +3,7 @@ package com.treasurehunt.dinobros.treasurehunt;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -46,6 +47,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(CREATE_MAPS_TABLE);
     }
+    
+    public void clearTable() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_TREASUREMAP, null, null);
+    }
 
     // Upgrading database
     @Override
@@ -74,15 +80,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Getting single contact
     public TreasureMap getTreasureMap(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_TREASUREMAP, new String[] { KEY_ID,
+/*        Cursor cursor = db.query(TABLE_TREASUREMAP, new String[] { KEY_ID,
                         KEY_MAP_NAME, KEY_MAP_DESC}, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[] { String.valueOf(id) }, null, null, null, null);*/
+
+        Cursor cursor = db.query(TABLE_TREASUREMAP,null,KEY_ID + "=" + id,null,null,null,null);
+
         if (cursor != null){cursor.moveToFirst();}
 
         TreasureMap treasureMap = new TreasureMap(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2));
-        // return contact
+        // return map
         return treasureMap;
+    }
+
+    // Getting contacts Count
+    public long getNumMaps() {
+        return DatabaseUtils.queryNumEntries(this.getReadableDatabase(), TABLE_TREASUREMAP);
     }
 }

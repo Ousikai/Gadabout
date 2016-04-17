@@ -22,7 +22,7 @@ public class TreasureMap {
                        //String clue0
                        //String clue1,
                        //String clue2
-                        ){
+    ){
         this._id = id;
         this._map_name = map_name;
         this._map_desc = map_desc;
@@ -68,15 +68,15 @@ public class TreasureMap {
         this._map_desc = _map_desc;
     }
 
-/*    public String get_clue0() {
+    public String get_clue0() {
         return _clue0;
     }
 
     public void set_clue0(String _clue0) {
         this._clue0 = _clue0;
-    }*/
+    }
 
- /*   public String get_clue1() {
+    public String get_clue1() {
         return _clue1;
     }
 
@@ -90,5 +90,5 @@ public class TreasureMap {
 
     public void set_clue2(String _clue2) {
         this._clue2 = _clue2;
-    }*/
+    }
 }
