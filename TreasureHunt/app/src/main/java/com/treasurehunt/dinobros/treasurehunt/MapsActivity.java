@@ -1,6 +1,7 @@
 package com.treasurehunt.dinobros.treasurehunt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -70,6 +71,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        //Button for going to a random place
+        final Button button_random = (Button) findViewById(R.id.button_random);
+        button_random.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent myIntent = new Intent(MapsActivity.this, database_sandbox.class);
+                MapsActivity.this.startActivity(myIntent);
+            }
+        });
+
+        // Other fun stuff
+
     }
 
 
@@ -129,7 +143,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         alpha(0.7f).
                         icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                 Context context = getApplicationContext();
-                Toast.makeText(context, position.latitude + " : " + position.longitude, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, position + " : " + position.longitude, Toast.LENGTH_SHORT).show();
                 curPos[0] = position.latitude;
                 curPos[1] = position.longitude;
             }

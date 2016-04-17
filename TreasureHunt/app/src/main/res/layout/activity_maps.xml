@@ -3,6 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/button_random"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="10"
+        android:text="To Database" />
+
     <EditText
         android:id="@+id/clue_info"
         android:layout_width="match_parent"
@@ -44,5 +52,4 @@
     </LinearLayout>
 
 </LinearLayout>
-
 

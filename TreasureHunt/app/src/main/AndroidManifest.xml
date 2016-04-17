@@ -34,7 +34,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".GamePlayActivity"
+            android:name=".MapsActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_maps"
             android:screenOrientation="portrait">
@@ -44,7 +44,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapsActivity"></activity>
+        <activity android:name=".GamePlayActivity" />
+        <activity android:name=".database_sandbox"></activity>
     </application>
 
 </manifest>

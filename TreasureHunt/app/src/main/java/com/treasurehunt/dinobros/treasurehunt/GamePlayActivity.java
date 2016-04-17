@@ -69,7 +69,23 @@ public class GamePlayActivity extends AppCompatActivity implements LocationListe
         if (curLoc.latitude!=-1000 && curLoc.longitude!=-1000){
             float[]res = new float[3];
             Location.distanceBetween(curLoc.latitude,curLoc.longitude,locs.get(clueNum).latitude,locs.get(clueNum).longitude, res);
-            if (res[0]<25){
+            if (res[0]<15){
+                TextView wrongRight = (TextView)findViewById(R.id.correctText);
+                wrongRight.setText("You're Right! - "+locs.get(clueNum)+","+curLoc+","+res[0]);
+            }
+            else{
+                TextView wrongRight = (TextView)findViewById(R.id.correctText);
+                wrongRight.setText("Wrong! "+locs.get(clueNum)+","+curLoc+","+res[0]);
+            }
+        }
+    }
+    @Override
+    public void onLocationChanged(Location location) {
+        curLoc = new LatLng(location.getLatitude(),location.getLongitude());
+        if (curLoc.latitude!=-1000 && curLoc.longitude!=-1000){
+            float[]res = new float[3];
+            Location.distanceBetween(curLoc.latitude,curLoc.longitude,locs.get(clueNum).latitude,locs.get(clueNum).longitude, res);
+            if (res[0]<12){
                 TextView wrongRight = (TextView)findViewById(R.id.correctText);
                 wrongRight.setText("You're Right! - "+locs.get(clueNum)+","+curLoc+","+res[0]);
             }
@@ -80,10 +96,6 @@ public class GamePlayActivity extends AppCompatActivity implements LocationListe
 
 
         }
-    }
-    @Override
-    public void onLocationChanged(Location location) {
-        curLoc = new LatLng(location.getLatitude(),location.getLongitude());
     }
 
 
