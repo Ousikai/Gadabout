@@ -16,7 +16,12 @@ public class database_sandbox extends AppCompatActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         db.clearTable();
         //db.addMap(new TreasureMap("Silly Steps", "The Heart of Dark"));
-        db.addMap(new TreasureMap("Silly Steps", "The Heart of Yak", "Klew0"));
+        db.addMap(new TreasureMap("Silly Steps",
+                "The Heart of Yak",
+                "Klew0",
+                "Crew2",
+                "Fab3"
+        ));
         //String thisStuff = " " +db.getNumMaps();
         TreasureMap booty = db.getTreasureMap(1);
         //TreasureMap booty = new TreasureMap(1, "Ravioli", "Mami Mia Pizzeria");
@@ -27,6 +32,8 @@ public class database_sandbox extends AppCompatActivity {
                 +"  ,Name: " + booty.get_map_name()
                 + " ,Desc: " + booty.get_map_desc()
                 + " ,Clue0:" +booty.get_clue0()
+                + " ,Clue1:" +booty.get_clue2()
+                + " ,Clue2:" +booty.get_clue1()
                 ;
 
         TextView test_str = (TextView)findViewById(R.id.file_dir);

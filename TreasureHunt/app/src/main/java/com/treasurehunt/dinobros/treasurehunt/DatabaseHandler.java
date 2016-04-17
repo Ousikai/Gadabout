@@ -16,7 +16,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "maps_database";
@@ -28,8 +28,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_MAP_NAME = "map_name";
     private static final String KEY_MAP_DESC = "map_desc";
     private static final String KEY_CLUE0 = "clue0";
-    //private static final String KEY_CLUE1 = "clue1";
-    //private static final String KEY_CLUE2 = "clue2";
+    private static final String KEY_CLUE1 = "clue1";
+    private static final String KEY_CLUE2 = "clue2";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,9 +42,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_MAP_NAME + " TEXT,"
                 + KEY_MAP_DESC + " TEXT,"
-                + KEY_CLUE0    + " TEXT"
-                //+ KEY_CLUE1 + " TEXT,"
-                //+ KEY_CLUE2 + " TEXT,"
+                + KEY_CLUE0    + " TEXT,"
+                + KEY_CLUE1 + " TEXT,"
+                + KEY_CLUE2 + " TEXT"
                 + ")";
         db.execSQL(CREATE_MAPS_TABLE);
     }
@@ -70,8 +70,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_MAP_NAME, treasureMap.get_map_name());
         values.put(KEY_MAP_DESC, treasureMap.get_map_desc());
         values.put(KEY_CLUE0, treasureMap.get_clue0());
-        //values.put(KEY_CLUE1, treasureMap.get_clue1());
-        //values.put(KEY_CLUE2, treasureMap.get_clue2());
+        values.put(KEY_CLUE1, treasureMap.get_clue1());
+        values.put(KEY_CLUE2, treasureMap.get_clue2());
 
         // Inserting Row
         db.insert(TABLE_TREASUREMAP, null, values);
@@ -89,8 +89,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         if (cursor != null){cursor.moveToFirst();}
 
-        TreasureMap treasureMap = new TreasureMap(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), cursor.getString(3));
+        TreasureMap treasureMap = new TreasureMap(
+                Integer.parseInt(cursor.getString(0)), // map ID
+                cursor.getString(1), // map name
+                cursor.getString(2), // map desc
+                cursor.getString(3), //clue0
+                cursor.getString(3), //clue1
+                cursor.getString(3) //clue2
+                );
         // return map
         return treasureMap;
     }
