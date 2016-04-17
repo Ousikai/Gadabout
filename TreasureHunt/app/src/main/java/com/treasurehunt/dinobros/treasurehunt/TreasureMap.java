@@ -18,28 +18,28 @@ public class TreasureMap {
     }
 
     // constructor
-    public TreasureMap(int id, String map_name, String map_desc
-                       //String clue0
+    public TreasureMap(int id, String map_name, String map_desc,
+                       String clue0
                        //String clue1,
                        //String clue2
     ){
         this._id = id;
         this._map_name = map_name;
         this._map_desc = map_desc;
-        //this._clue0 = clue0;
+        this._clue0 = clue0;
         //this._clue1 = clue1;
         //this._clue2 = clue2;
     }
 
     // constructor
-    public TreasureMap(String map_name, String map_desc
-                       //String clue0
+    public TreasureMap(String map_name, String map_desc,
+                       String clue0
                        //String clue1,
                        //String clue2
     ){
         this._map_name = map_name;
         this._map_desc = map_desc;
-        //this._clue0 = clue0;
+        this._clue0 = clue0;
         //this._clue1 = clue1;
         //this._clue2 = clue2;
     }

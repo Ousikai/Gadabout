@@ -16,7 +16,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
+
     // Database Name
     private static final String DATABASE_NAME = "maps_database";
     // TreasureMap table name
@@ -26,7 +27,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_MAP_NAME = "map_name";
     private static final String KEY_MAP_DESC = "map_desc";
-    //private static final String KEY_CLUE0 = "clue0";
+    private static final String KEY_CLUE0 = "clue0";
     //private static final String KEY_CLUE1 = "clue1";
     //private static final String KEY_CLUE2 = "clue2";
 
@@ -37,17 +38,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_MAPS_TABLE = "CREATE TABLE " + TABLE_TREASUREMAP + "(" +
-                KEY_ID + " INTEGER PRIMARY KEY,"
+        String CREATE_MAPS_TABLE = "CREATE TABLE " + TABLE_TREASUREMAP + "("
+                + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_MAP_NAME + " TEXT,"
-                + KEY_MAP_DESC + " TEXT"
-                //+ KEY_CLUE0 + " TEXT,"
+                + KEY_MAP_DESC + " TEXT,"
+                + KEY_CLUE0    + " TEXT"
                 //+ KEY_CLUE1 + " TEXT,"
                 //+ KEY_CLUE2 + " TEXT,"
                 + ")";
         db.execSQL(CREATE_MAPS_TABLE);
     }
-    
+
     public void clearTable() {
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete(TABLE_TREASUREMAP, null, null);
@@ -62,13 +63,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Adding new contact
+    // Adding new map
     public void addMap(TreasureMap treasureMap) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_MAP_NAME, treasureMap.get_map_name());
         values.put(KEY_MAP_DESC, treasureMap.get_map_desc());
-        //values.put(KEY_CLUE0, treasureMap.get_clue0());
+        values.put(KEY_CLUE0, treasureMap.get_clue0());
         //values.put(KEY_CLUE1, treasureMap.get_clue1());
         //values.put(KEY_CLUE2, treasureMap.get_clue2());
 
@@ -89,7 +90,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null){cursor.moveToFirst();}
 
         TreasureMap treasureMap = new TreasureMap(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
+                cursor.getString(1), cursor.getString(2), cursor.getString(3));
         // return map
         return treasureMap;
     }
