@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 /**
  * Created by ousikai on 4/17/16.
  */
@@ -63,7 +65,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Adding new map
+    // Adding new TreasureMap
     public void addMap(TreasureMap treasureMap) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -78,7 +80,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // Getting single contact
+    // Getting single TreasureMap
     public TreasureMap getTreasureMap(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 /*        Cursor cursor = db.query(TABLE_TREASUREMAP, new String[] { KEY_ID,
@@ -101,7 +103,55 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return treasureMap;
     }
 
-    // Getting contacts Count
+    // Getting All TreasureMaps
+    public ArrayList<TreasureMap> getAllMaps() {
+        ArrayList<TreasureMap> mapList = new ArrayList<TreasureMap>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_TREASUREMAP;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                mapList.add(new TreasureMap(
+                        Integer.parseInt(cursor.getString(0)), // map ID
+                        cursor.getString(1), // map name
+                        cursor.getString(2), // map desc
+                        cursor.getString(3), //clue0
+                        cursor.getString(3), //clue1
+                        cursor.getString(3) //clue2
+                ));
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return mapList;
+    }
+
+    // Updating single TreasureMap
+    public int updateMap(TreasureMap treasureMap) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_MAP_NAME, treasureMap.get_map_name());
+        values.put(KEY_MAP_DESC, treasureMap.get_map_desc());
+        values.put(KEY_CLUE0, treasureMap.get_clue0());
+        values.put(KEY_CLUE1, treasureMap.get_clue1());
+        values.put(KEY_CLUE2, treasureMap.get_clue2());
+
+        // updating row
+        return db.update(TABLE_TREASUREMAP, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(treasureMap.get_id()) });
+    }
+
+    // Deleting single TreasureMap
+    public void deleteMap(TreasureMap treasureMap) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_TREASUREMAP, KEY_ID + " = ?",
+                new String[]{String.valueOf(treasureMap.get_id())});
+        db.close();
+    }
+
+    // Getting TreasureMap Count
     public long getNumMaps() {
         return DatabaseUtils.queryNumEntries(this.getReadableDatabase(), TABLE_TREASUREMAP);
     }

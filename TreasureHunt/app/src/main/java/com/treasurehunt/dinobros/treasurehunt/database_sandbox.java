@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class database_sandbox extends AppCompatActivity {
 
     @Override
@@ -16,13 +18,18 @@ public class database_sandbox extends AppCompatActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         db.clearTable();
         //db.addMap(new TreasureMap("Silly Steps", "The Heart of Dark"));
-        db.addMap(new TreasureMap("Silly Steps",
-                "The Heart of Yak",
-                "Klew0",
-                "Crew2",
-                "Fab3"
-        ));
-        //String thisStuff = " " +db.getNumMaps();
+        db.addMap(new TreasureMap("Silly Steps", "The Heart of Yak",
+                "Klew0", "Crew2", "Fab3"));
+        db.addMap(new TreasureMap("sECOND mAP", "cool descr",
+                "1st", "2nd", "3rd"));
+        TreasureMap foolsgold = db.getTreasureMap(2);
+        foolsgold.set_map_name("better name");
+        int fakefan = db.updateMap(foolsgold);
+        db.addMap(new TreasureMap("chuck e. cheese", "don't care",
+                "don't care", "don't care", "don't care"));
+        TreasureMap noMore = db.getTreasureMap(1);
+        db.deleteMap(noMore);
+/*        //String thisStuff = " " +db.getNumMaps();
         TreasureMap booty = db.getTreasureMap(1);
         //TreasureMap booty = new TreasureMap(1, "Ravioli", "Mami Mia Pizzeria");
         long db_size = db.getNumMaps();
@@ -34,8 +41,14 @@ public class database_sandbox extends AppCompatActivity {
                 + " ,Clue0:" +booty.get_clue0()
                 + " ,Clue1:" +booty.get_clue2()
                 + " ,Clue2:" +booty.get_clue1()
-                ;
+                ;*/
 
+        ArrayList<TreasureMap> allMaps = db.getAllMaps();
+        String thisStuff = "";
+        for (TreasureMap booty : allMaps) {
+            thisStuff += ("Id: " + booty.get_id() + ", Name:" + booty.get_map_name() + "\n");
+        }
+        thisStuff += ("->" +fakefan);
         TextView test_str = (TextView)findViewById(R.id.file_dir);
         test_str.setText(thisStuff);
     }
