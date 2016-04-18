@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void createMap(View v){
-        Intent intent = new Intent(this, CreateMap.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
