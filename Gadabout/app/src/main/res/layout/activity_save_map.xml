@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
+    tools:context="com.example.sudipta.gadabout.SaveMap">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:text="YOUR CLUES:\n Clue 01: Find this place.\n Clue 02: Then this place.\n Clue 03: You can find this place.\n Clue 04: Maybe this place too.\n Clue 05: Then this place.\n Clue 06: Come here after.\n Clue 07: You’re getting close.\n Clue 08: Almost there.\n Clue 09: One more step.\n Clue 10: You’re here! "
+        android:id="@+id/textView"
+        android:maxLength="300"
+        android:scrollbars="vertical"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_above="@+id/linear"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="BACK"
+            android:onClick="back"/>
+
+        <Button
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="save"
+            android:layout_weight="1"
+            android:text="DONE" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView8"
+        android:src="@drawable/save"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/textView" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:hint="Write the name of your map here."
+        android:textColorHint="#DCDCDC"
+        android:layout_above="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/imageView8"
+        android:layout_alignEnd="@+id/imageView8" />
+</RelativeLayout>
