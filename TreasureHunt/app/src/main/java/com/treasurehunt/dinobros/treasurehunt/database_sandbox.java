@@ -3,7 +3,9 @@ package com.treasurehunt.dinobros.treasurehunt;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -51,5 +53,11 @@ public class database_sandbox extends AppCompatActivity {
         thisStuff += ("->" +fakefan);
         TextView test_str = (TextView)findViewById(R.id.file_dir);
         test_str.setText(thisStuff);
+
+        // Find the ListView resource.
+        ListView mapsListView = (ListView) findViewById(R.id.listview_sandbox);
+        ArrayAdapter<TreasureMap> adapter = new ArrayAdapter<TreasureMap>(this,
+                android.R.layout.simple_list_item_1, allMaps);
+        mapsListView.setAdapter(adapter);
     }
 }

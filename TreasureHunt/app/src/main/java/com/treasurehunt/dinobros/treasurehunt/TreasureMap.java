@@ -45,6 +45,11 @@ public class TreasureMap {
         this._clue2 = clue2;
     }
 
+    @Override
+    public String toString() {
+        return this.get_map_name();
+    }
+
     public int get_id() {
         return _id;
     }
