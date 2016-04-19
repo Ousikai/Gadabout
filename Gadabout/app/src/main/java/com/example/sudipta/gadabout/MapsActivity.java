@@ -124,7 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         alpha(0.7f).
                         icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                 Context context = getApplicationContext();
-                Toast.makeText(context, position + " : " + position.longitude, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, position + " : " + position.longitude, Toast.LENGTH_SHORT).show();
                 curPos[0] = position.latitude;
                 curPos[1] = position.longitude;
             }

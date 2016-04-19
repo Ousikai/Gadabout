@@ -47,8 +47,9 @@
         android:layout_height="0px"
         android:layout_weight="50"
         android:id="@+id/listView"
-        android:background="@color/black"
-         />
+        android:choiceMode="singleChoice"
+        android:listSelector="#666666"
+        android:background="@color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"

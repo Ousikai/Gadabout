@@ -41,6 +41,8 @@
         android:layout_height="0px"
         android:layout_weight="50"
         android:id="@+id/listView"
+        android:choiceMode="singleChoice"
+        android:listSelector="#666666"
         android:background="@color/black" />
 
     <LinearLayout
