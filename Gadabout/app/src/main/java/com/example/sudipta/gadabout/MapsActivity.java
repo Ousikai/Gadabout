@@ -36,8 +36,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // GoogleMap Object
     private GoogleMap mMap;
 
-    // Clue Management Variables
-    int clue_counter = 1;
+    //Set up Treasure Map object for submitting into database
+    int clue_limit = 0;
+    TreasureMap newMap;
 
     private double[] curPos = {0,0};
     private ArrayList<LatLng> allPos = new ArrayList<LatLng>();
@@ -53,6 +54,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //Button for creating clues
+        final Button button_clue = (Button) findViewById(R.id.set_clue);
+        button_clue.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                addMark();
+            }
+        });
 
     }
 
@@ -87,7 +96,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Create Clues
         newClue();
-
     }
     private void enableMyLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -116,11 +124,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onMapClick(LatLng position) {
                 mMap.clear();
                 addAll();
-                String clue_name = "Clue number " + clue_counter;
-                clue_counter++;
+                //String clue_name = "Clue number " + clue_counter;
                 mMap.addMarker(new MarkerOptions().
                         position(position).
-                        title(clue_name).
+                        //title(clue_name).
                         alpha(0.7f).
                         icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                 Context context = getApplicationContext();
@@ -135,14 +142,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Currently pending
     }
 
-//    public void addMark(){
-//        allPos.add(new LatLng(curPos[0], curPos[1]));
-//        EditText txt   = (EditText)findViewById(R.id.clue_info);
-//        data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
-//        mMap.clear();
-//        addAll();
-//
-//    }
+    public void addMark(){
+        if (clue_limit==0){
+            newMap.set_clue0(""+curPos[0]+";"+curPos[1]);
+            allPos.add(new LatLng(curPos[0], curPos[1]));
+            //EditText txt   = (EditText)findViewById(R.id.editText);
+            //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
+            mMap.clear();
+            addAll();
+            clue_limit++;}
+        else if (clue_limit==1){
+            newMap.set_clue1("" + curPos[0] + ";" + curPos[1]);
+            allPos.add(new LatLng(curPos[0], curPos[1]));
+            //EditText txt   = (EditText)findViewById(R.id.editText);
+            //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
+            mMap.clear();
+            addAll();
+            clue_limit++;}
+        else if (clue_limit==2){
+            newMap.set_clue2("" + curPos[0] + ";" + curPos[1]);
+            allPos.add(new LatLng(curPos[0], curPos[1]));
+            EditText txt   = (EditText)findViewById(R.id.editText);
+            //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
+            mMap.clear();
+            addAll();
+            clue_limit++;}
+        else if (clue_limit>2){
+            newMap.set_clue2(""+curPos[0]+";"+curPos[1]);
+            allPos.remove(2);
+            allPos.add(new LatLng(curPos[0], curPos[1]));
+            EditText txt   = (EditText)findViewById(R.id.editText);
+            //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
+            mMap.clear();
+            addAll();
+        }
+/*        allPos.add(new LatLng(curPos[0], curPos[1]));
+        EditText txt   = (EditText)findViewById(R.id.editText);
+        //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
+        mMap.clear();
+        addAll();*/
+
+    }
 
     public void addAll(){
         for (LatLng point : allPos) {

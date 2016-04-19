@@ -49,7 +49,7 @@
             android:onClick="back"/>
 
         <Button
-            android:id="@+id/play"
+            android:id="@+id/set_clue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

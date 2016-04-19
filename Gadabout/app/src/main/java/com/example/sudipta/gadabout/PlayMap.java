@@ -26,14 +26,14 @@ public class PlayMap extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listView);
 
         DatabaseHandler db = new DatabaseHandler(this);
-/*        db.clearTable();
+        db.clearTable();
         // Fill database with pre-loaded maps
         db.addMap(new TreasureMap("Down Newcomb Road",
                 "Go from the beginning of the Newcomb Road, to the bridge, then the top of the hill " +
                         "facing the bookstore",
-                "38.033751|-78.508423", "38.034872|-78.508171", "38.035335|-78.507634"));
-        db.addMap(new TreasureMap("sECOND mAP", "cool descr",
-                "1st", "2nd", "3rd"));*/
+                "38.033751;-78.508423", "38.034872;-78.508171", "38.035335;-78.507634"));
+        db.addMap(new TreasureMap("Engineers Waverly", "Same Coordinates as before for the moment",
+                "38.033751;-78.508423", "38.034872;-78.508171", "38.035335;-78.507634"));
 
         //Set up ArrayAdapter
         ArrayList<TreasureMap> allMaps = db.getAllMaps();
