@@ -1,5 +1,9 @@
 package com.example.sudipta.gadabout;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+
 /**
  * Created by ousikai on 4/17/16.
  */
@@ -95,4 +99,21 @@ public class TreasureMap {
     public void set_clue2(String _clue2) {
         this._clue2 = _clue2;
     }
+
+    public ArrayList<String> get_clue_desc(){
+        ArrayList<String> clue_desc = new ArrayList<String>();
+        clue_desc.add(this._clue0.split(";")[0]);
+        clue_desc.add(this._clue1.split(";")[0]);
+        clue_desc.add(this._clue2.split(";")[0]);
+        return clue_desc;
+    }
+
+    public ArrayList<LatLng> get_clue_latlng(){
+        ArrayList<LatLng> clue_latng = new ArrayList<LatLng>();
+        clue_latng.add(new LatLng(Double.parseDouble(this._clue0.split(";")[1]),Double.parseDouble(this._clue0.split(";")[2])));
+        clue_latng.add(new LatLng(Double.parseDouble(this._clue1.split(";")[1]),Double.parseDouble(this._clue1.split(";")[2])));
+        clue_latng.add(new LatLng(Double.parseDouble(this._clue2.split(";")[1]),Double.parseDouble(this._clue2.split(";")[2])));
+        return clue_latng;
+    }
+
 }
