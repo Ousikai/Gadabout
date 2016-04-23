@@ -53,13 +53,13 @@ public class PlayMap extends AppCompatActivity {
                 System.out.println(index);
             }
         });
-       TreasureMap test1 = allMaps.get(0);
+/*       TreasureMap test1 = allMaps.get(0);
         ArrayList<String> testStr = test1.get_clue_desc();
         ArrayList<LatLng> testLatLng = test1.get_clue_latlng();
         for (int i=0;i<3;i++){
             System.out.print(testStr.get(i));
             System.out.println(testLatLng.get(i));
-        }
+        }*/
 
 
 

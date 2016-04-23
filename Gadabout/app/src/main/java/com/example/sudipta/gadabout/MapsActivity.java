@@ -37,8 +37,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     //Set up Treasure Map object for submitting into database
-    int clue_limit = 0;
-    TreasureMap newMap;
+    private int clue_limit = 0;
+    private ArrayList<String> clue_desc = new ArrayList<String>();
+    TreasureMap newMap = new TreasureMap("pending", "pending", "pending", "pending", "pending");
 
     private double[] curPos = {0,0};
     private ArrayList<LatLng> allPos = new ArrayList<LatLng>();
@@ -124,10 +125,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onMapClick(LatLng position) {
                 mMap.clear();
                 addAll();
-                //String clue_name = "Clue number " + clue_counter;
                 mMap.addMarker(new MarkerOptions().
                         position(position).
-                        //title(clue_name).
                         alpha(0.7f).
                         icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
                 Context context = getApplicationContext();
@@ -144,53 +143,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void addMark(){
         if (clue_limit==0){
-            newMap.set_clue0(""+curPos[0]+";"+curPos[1]);
+            EditText txt = (EditText)findViewById(R.id.editText);
+            clue_desc.add(txt.getText().toString());
+            newMap.set_clue0(txt.getText().toString() + ";" + curPos[0] + ";" + curPos[1]);
             allPos.add(new LatLng(curPos[0], curPos[1]));
-            //EditText txt   = (EditText)findViewById(R.id.editText);
-            //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
+            //System.out.println(newMap.get_clue0());
             mMap.clear();
             addAll();
+            txt.setText("");
             clue_limit++;}
         else if (clue_limit==1){
-            newMap.set_clue1("" + curPos[0] + ";" + curPos[1]);
+            EditText txt = (EditText)findViewById(R.id.editText);
+            clue_desc.add(txt.getText().toString());
+            newMap.set_clue1(txt.getText().toString() + ";" + curPos[0] + ";" + curPos[1]);
             allPos.add(new LatLng(curPos[0], curPos[1]));
-            //EditText txt   = (EditText)findViewById(R.id.editText);
-            //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
             mMap.clear();
             addAll();
+            txt.setText("");
             clue_limit++;}
         else if (clue_limit==2){
-            newMap.set_clue2("" + curPos[0] + ";" + curPos[1]);
+            EditText txt = (EditText)findViewById(R.id.editText);
+            clue_desc.add(txt.getText().toString());
+            newMap.set_clue2(txt.getText().toString() + ";" + curPos[0] + ";" + curPos[1]);
             allPos.add(new LatLng(curPos[0], curPos[1]));
-            EditText txt   = (EditText)findViewById(R.id.editText);
-            //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
             mMap.clear();
             addAll();
+            txt.setText("");
             clue_limit++;}
-        else if (clue_limit>2){
-            newMap.set_clue2(""+curPos[0]+";"+curPos[1]);
-            allPos.remove(2);
-            allPos.add(new LatLng(curPos[0], curPos[1]));
-            EditText txt   = (EditText)findViewById(R.id.editText);
-            //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
-            mMap.clear();
-            addAll();
-        }
-/*        allPos.add(new LatLng(curPos[0], curPos[1]));
-        EditText txt   = (EditText)findViewById(R.id.editText);
-        //data1 +=  txt.getText() + "," +curPos[0] + "," + curPos[1]+";";
-        mMap.clear();
-        addAll();*/
-
     }
 
     public void addAll(){
+        int i = 0;
         for (LatLng point : allPos) {
+            int j = i+1;
             options.position(point);
-            options.title("");
-            options.snippet("");
+            options.title("Clue "+ j);
+            options.snippet(clue_desc.get(i));
             options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
             mMap.addMarker(options);
+            i++;
         }
     }
 
@@ -209,11 +200,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.e("Exception", "File write failed: " + e.toString());
         }
     }
-
-    //Toast.makeText(this, "Mom's spaghetti", Toast.LENGTH_SHORT).show();
-    //LatLng sydney = new LatLng(-34, 151);
-    //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-    //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
 }
 

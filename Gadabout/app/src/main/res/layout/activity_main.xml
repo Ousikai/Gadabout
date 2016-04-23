@@ -45,8 +45,8 @@
     <Button
         android:layout_height="50dp"
         android:layout_width="150dp"
-        android:text="BROWSE MAPS"
-        android:onClick="browseMaps"
+        android:text="CREATE MAPS"
+        android:onClick="createMap"
         android:id="@+id/button2"
         android:layout_below="@+id/button"
         android:layout_centerHorizontal="true" />
@@ -54,8 +54,8 @@
     <Button
         android:layout_height="50dp"
         android:layout_width="150dp"
-        android:text="CREATE MAPS"
-        android:onClick="createMap"
+        android:text="BROWSE MAPS"
+        android:onClick="browseMaps"
         android:id="@+id/button3"
         android:layout_below="@+id/button2"
         android:layout_centerHorizontal="true" />

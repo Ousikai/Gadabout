@@ -41,25 +41,11 @@
         android:id="@+id/linear">
 
         <Button
-            android:id="@+id/back"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="BACK TO MENU"
-            android:onClick="back"/>
-
-        <Button
             android:id="@+id/set_clue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SET CLLUE" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linear2">
 
         <Button
             android:id="@+id/save"
@@ -68,6 +54,20 @@
             android:layout_weight="1"
             android:text="SAVE MAP"
             android:onClick="saveMap"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear2">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="BACK TO MENU"
+            android:onClick="back"/>
     </LinearLayout>
 </LinearLayout>
 
