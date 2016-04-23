@@ -94,8 +94,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(1), // map name
                 cursor.getString(2), // map desc
                 cursor.getString(3), //clue0
-                cursor.getString(3), //clue1
-                cursor.getString(3) //clue2
+                cursor.getString(4), //clue1
+                cursor.getString(5) //clue2
                 );
         // return map
         return treasureMap;
@@ -116,8 +116,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         cursor.getString(1), // map name
                         cursor.getString(2), // map desc
                         cursor.getString(3), //clue0
-                        cursor.getString(3), //clue1
-                        cursor.getString(3) //clue2
+                        cursor.getString(4), //clue1
+                        cursor.getString(5) //clue2
                 ));
             } while (cursor.moveToNext());
         }

@@ -28,10 +28,11 @@ public class PlayMap extends AppCompatActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         db.clearTable();
         // Fill database with pre-loaded maps
-        db.addMap(new TreasureMap("Down Newcomb Road",
+        TreasureMap coolMap = new TreasureMap("Down Newcomb Road",
                 "Go from the beginning of the Newcomb Road, to the bridge, then the top of the hill " +
                         "facing the bookstore",
-                "38.033751;-78.508423", "38.034872;-78.508171", "38.035335;-78.507634"));
+                "38.033751;-78.508423", "38.034872;-78.508171", "38.035335;-78.507634");
+        db.addMap(coolMap);
         db.addMap(new TreasureMap("Engineers Waverly", "Same Coordinates as before for the moment",
                 "38.033751;-78.508423", "38.034872;-78.508171", "38.035335;-78.507634"));
 
@@ -46,6 +47,16 @@ public class PlayMap extends AppCompatActivity {
                 System.out.println(index);
             }
         });
+
+        TreasureMap test1 = allMaps.get(0);
+        String allStrings = "~~"+test1.get_map_name()+"~~"+test1.get_map_desc()+"~~"+test1.get_clue0()
+                +"~~"+test1.get_clue1()+"~~"+test1.get_clue2();
+        System.out.println(allStrings);
+        String newStr = "~~"+coolMap.get_map_name()+"~~"+coolMap.get_map_desc()+"~~"+coolMap.get_clue0()
+                +"~~"+coolMap.get_clue1()+"~~"+coolMap.get_clue2();
+        System.out.println(newStr);
+
+
     }
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);
