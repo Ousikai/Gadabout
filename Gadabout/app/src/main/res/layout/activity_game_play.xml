@@ -6,14 +6,26 @@
     android:background="#FFFFFF"
     tools:context="com.example.sudipta.gadabout.GamePlay"
     android:orientation="vertical">
-
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="30"
-        android:layout_gravity="center"
-        android:id="@+id/imageView3"
-        android:src="@drawable/logo_black_sm" />
+        android:id="@+id/linear3">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:layout_gravity="center"
+            android:id="@+id/compass"
+            android:src="@drawable/compass" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_gravity="center"
+            android:id="@+id/tx"
+            android:src="@drawable/justtext" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,28 +59,37 @@
         android:layout_centerHorizontal="true"
         android:textColor="#000000"
         android:textSize="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0px"
+        android:layout_weight="5"
+        android:layout_gravity="center"
+        android:text="Need some help?"
+        android:id="@+id/dir"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="10"
-        android:id="@+id/linear"
-        android:layout_alignParentBottom="true">
+        android:id="@+id/linear">
 
         <Button
-            android:id="@+id/back"
+            android:id="@+id/help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="back"
-            android:text="BACK TO MENU" />
+            android:onClick="helpMe"
+            android:text="HELP ME!" />
         <Button
-            android:id="@+id/here"
+            android:id="@+id/giveup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="checkHere"
-            android:text="I'M HERE!" />
+            android:onClick="giveUp"
+            android:text="I GIVE UP!" />
 
         <Button
             android:id="@+id/next"
@@ -78,5 +99,20 @@
             android:onClick="nextClue"
             android:text="NEXT CLUE"
             android:enabled="false" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="10"
+        android:id="@+id/linear5"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="back"
+            android:text="BACK TO MENU" />
     </LinearLayout>
 </LinearLayout>
