@@ -28,19 +28,19 @@ public class PlayMap extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listView);
 
         DatabaseHandler db = new DatabaseHandler(this);
-        db.clearTable();
+/*        db.clearTable();
         // Fill database with pre-loaded maps
         TreasureMap coolMap = new TreasureMap("Down Newcomb Road",
                 "Cool clue desc!!",
                 "Newcomb Road;38.033751;-78.508423",
                 "Bridge;38.034872;-78.508171",
                 "Bookstore Hill;38.035335;-78.507634");
-        db.addMap(coolMap);
-        db.addMap(new TreasureMap("Engineers Waverly",
-                "Cool clue desc!!",
-                "Newcomb Road;38.033751;-78.508423",
-                "Bridge;38.034872;-78.508171",
-                "Bookstore Hill;38.035335;-78.507634"));
+        db.addMap(coolMap);*/
+//        db.addMap(new TreasureMap("Engineers Waverly",
+//                "Cool clue desc!!",
+//                "Newcomb Road;38.033751;-78.508423",
+//                "Bridge;38.034872;-78.508171",
+//                "Bookstore Hill;38.035335;-78.507634"));
 
         //Set up ArrayAdapter
         ArrayList<TreasureMap> allMaps = db.getAllMaps();
@@ -60,9 +60,6 @@ public class PlayMap extends AppCompatActivity {
             System.out.print(testStr.get(i));
             System.out.println(testLatLng.get(i));
         }*/
-
-
-
     }
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);

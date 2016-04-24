@@ -1,13 +1,13 @@
 package com.example.sudipta.gadabout;
 
 import com.google.android.gms.maps.model.LatLng;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by ousikai on 4/17/16.
  */
-public class TreasureMap {
+public class TreasureMap implements Serializable{
     private int _id;
     private String _map_name;
     private String _map_desc;

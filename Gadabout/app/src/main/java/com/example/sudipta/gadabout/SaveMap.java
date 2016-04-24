@@ -6,9 +6,15 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 public class SaveMap extends AppCompatActivity {
+    TreasureMap savedMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +24,26 @@ public class SaveMap extends AppCompatActivity {
         setContentView(R.layout.activity_save_map);
         TextView clues = (TextView) findViewById(R.id.textView);
         clues.setMovementMethod(new ScrollingMovementMethod());
-
+        //Intent i = getIntent();
+        savedMap = (TreasureMap)getIntent().getSerializableExtra("savedMap");
+        ArrayList<String> clue_desc = savedMap.get_clue_desc();
+        String clueDisplay = "YOUR CLUES:\n";
+        clueDisplay+="Clue 01: "+ clue_desc.get(0) +"\n";
+        clueDisplay+="Clue 02: "+ clue_desc.get(1) +"\n";
+        clueDisplay+="Clue 03: "+ clue_desc.get(2) +"\n";
+        clues.setText(clueDisplay);
     }
+
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
     public void save(View v){
+        EditText mapName = (EditText)findViewById(R.id.editText2);
+        savedMap.set_map_name(mapName.getText().toString());
+        DatabaseHandler db = new DatabaseHandler(this);
+        db.addMap(savedMap);
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);

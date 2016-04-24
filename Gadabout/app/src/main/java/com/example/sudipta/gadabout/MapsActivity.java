@@ -74,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void saveMap(View v){
         Intent intent = new Intent(this, SaveMap.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.putExtra("savedMap", newMap);
         startActivity(intent);
     }
 
