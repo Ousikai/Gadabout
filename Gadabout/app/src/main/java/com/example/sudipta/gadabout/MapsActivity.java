@@ -2,6 +2,7 @@ package com.example.sudipta.gadabout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -63,6 +64,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 addMark();
             }
         });
+
+        // Set fancy font!
+        Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
+        Button b1 = (Button)findViewById(R.id.save);
+        b1.setTypeface(tf);
+        Button b2 = (Button)findViewById(R.id.set_clue);
+        b2.setTypeface(tf);
+        Button b3 = (Button)findViewById(R.id.back);
+        b3.setTypeface(tf);
+        EditText et= (EditText) findViewById(R.id.editText);
+        et.setTypeface(tf);
 
     }
 

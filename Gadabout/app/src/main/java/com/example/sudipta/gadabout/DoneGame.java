@@ -2,9 +2,12 @@ package com.example.sudipta.gadabout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class DoneGame extends AppCompatActivity {
     // Use shared preferences to update high score
@@ -16,6 +19,13 @@ public class DoneGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_done_game);
+
+        // Set fancy font!
+        Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
+        TextView tv1 = (TextView) findViewById(R.id.textView4);
+        tv1.setTypeface(tf);
+        Button b1 = (Button) findViewById(R.id.back);
+        b1.setTypeface(tf);
 
         // Update High Score
         preferenceSettings = getPreferences(PREFERENCE_MODE_PRIVATE);

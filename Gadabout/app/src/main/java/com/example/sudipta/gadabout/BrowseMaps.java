@@ -1,11 +1,14 @@
 package com.example.sudipta.gadabout;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,6 +21,17 @@ public class BrowseMaps extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_browse_maps);
         lv = (ListView) findViewById(R.id.listView);
+
+        // Fancy fonts
+        Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
+        Button b1 = (Button) findViewById(R.id.button4);
+        b1.setTypeface(tf);
+        Button b2 = (Button) findViewById(R.id.back);
+        b2.setTypeface(tf);
+        Button b3 = (Button) findViewById(R.id.play);
+        b3.setTypeface(tf);
+        EditText et= (EditText) findViewById(R.id.editText);
+        et.setTypeface(tf);
 
         // Instanciating an array list (you don't need to do this,
         // you already have yours).

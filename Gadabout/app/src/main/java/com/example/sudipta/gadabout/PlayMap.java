@@ -1,12 +1,15 @@
 package com.example.sudipta.gadabout;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +63,17 @@ public class PlayMap extends AppCompatActivity {
             System.out.print(testStr.get(i));
             System.out.println(testLatLng.get(i));
         }*/
+
+        // Set fancy fonts!
+        Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
+        Button b1 = (Button) findViewById(R.id.button4);
+        b1.setTypeface(tf);
+        Button b2 = (Button) findViewById(R.id.play);
+        b2.setTypeface(tf);
+        Button b3 = (Button) findViewById(R.id.back);
+        b3.setTypeface(tf);
+        EditText et= (EditText) findViewById(R.id.editText);
+        et.setTypeface(tf);
     }
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);

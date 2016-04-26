@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -65,6 +66,25 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
 
+        // Set fancy font!
+        Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
+        TextView clueDesc = (TextView) findViewById(R.id.textView);
+        clueDesc.setTypeface(tf);
+        TextView tv2 = (TextView) findViewById(R.id.textView2);
+        tv2.setTypeface(tf);
+        TextView tv3 = (TextView) findViewById(R.id.textView3);
+        tv3.setTypeface(tf);
+        TextView tv4 = (TextView) findViewById(R.id.dir);
+        tv4.setTypeface(tf);
+        Button b1 = (Button) findViewById(R.id.help);
+        b1.setTypeface(tf);
+        Button b2 = (Button) findViewById(R.id.giveup);
+        b2.setTypeface(tf);
+        Button b3 = (Button) findViewById(R.id.next);
+        b3.setTypeface(tf);
+        Button b4 = (Button) findViewById(R.id.back);
+        b4.setTypeface(tf);
+
         image = (ImageView) findViewById(R.id.compass);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -85,7 +105,6 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         curr_map = allMaps.get(curr_map_index);
         clue_desc = curr_map.get_clue_desc();
         clue_locs = curr_map.get_clue_latlng();
-        TextView clueDesc = (TextView) findViewById(R.id.textView);
         clueDesc.setText("CURRENT MAP: " + curr_map.get_map_name() + " - " + curr_map.get_map_desc() + "\nCurrent Clue: " + clue_desc.get(currClue));
 
 
