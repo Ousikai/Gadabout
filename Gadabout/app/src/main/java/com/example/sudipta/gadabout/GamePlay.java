@@ -1,8 +1,11 @@
 package com.example.sudipta.gadabout;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
@@ -34,7 +38,7 @@ import com.google.android.gms.vision.face.Landmark;
 
 import java.util.ArrayList;
 
-public class GamePlay extends AppCompatActivity implements LocationListener, SensorEventListener {
+public class GamePlay extends AppCompatActivity implements LocationListener, SensorEventListener{
     int curr_map_index;
     TreasureMap curr_map;
     ArrayList<String> clue_desc;
@@ -66,7 +70,20 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play);
 
-        // Set fancy font!
+        boolean savedGame = getIntent().getBooleanExtra("saved", false);
+        if (savedGame){
+            curr_map_index = getIntent().getIntExtra("saved_index", -1);
+            currClue = getIntent().getIntExtra("saved_clue", 0);
+        }
+        else{
+            curr_map_index = getIntent().getIntExtra("index", -1);
+            currClue = 0;
+        }
+
+
+        image = (ImageView) findViewById(R.id.compass);
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        //SET FONTS
         Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
         TextView clueDesc = (TextView) findViewById(R.id.textView);
         clueDesc.setTypeface(tf);
@@ -84,14 +101,10 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         b3.setTypeface(tf);
         Button b4 = (Button) findViewById(R.id.back);
         b4.setTypeface(tf);
-
-        image = (ImageView) findViewById(R.id.compass);
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
+        //END SET FONTS
 
         b = (Button) findViewById(R.id.next);
         b.setEnabled(false);
-
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -99,7 +112,6 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-        curr_map_index = getIntent().getIntExtra("index", -1);
         DatabaseHandler db = new DatabaseHandler(this);
         ArrayList<TreasureMap> allMaps = db.getAllMaps();
         curr_map = allMaps.get(curr_map_index);
@@ -124,6 +136,8 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
             currClue++;
             TextView clueDesc = (TextView) findViewById(R.id.textView);
             clueDesc.setText("CURRENT MAP: " + curr_map.get_map_name() + " - " + curr_map.get_map_desc() + "\nCurrent Clue: " + clue_desc.get(currClue));
+            b = (Button) findViewById(R.id.next);
+            b.setEnabled(false);
         } else if (currClue >= clue_desc.size() - 1) {
             currClue = 0;
             b.setEnabled(false);
@@ -264,6 +278,7 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+        saveGame();
     }
 
 
@@ -277,6 +292,7 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
+        saveGame();
     }
 
     @Override
@@ -301,5 +317,22 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+    @Override
+    public void onBackPressed() {
+        saveGame();
+        super.onBackPressed();
+    }
+
+    public void saveGame(){
+        if(currClue>0 && currClue < clue_desc.size()-1){
+            SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("saved", true);
+            editor.putInt("saved_map", curr_map_index);
+            editor.putInt("saved_clue", currClue);
+            editor.apply();
+            System.out.println("Game act. saved: " + settings.getBoolean("saved", false));
+        }
     }
 }

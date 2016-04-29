@@ -7,7 +7,6 @@ oscar:
 
 
 sudipta:
--get SavedGame to work
 - Handle rotation
 	- saved bundle data on these actions
 -email
@@ -15,5 +14,4 @@ sudipta:
 
 Either:
 -Map Title Text shows up in white
--search button?
 
