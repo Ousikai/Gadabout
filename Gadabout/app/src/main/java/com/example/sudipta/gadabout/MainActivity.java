@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         b2.setTypeface(tf);
         Button b3 = (Button) findViewById(R.id.button3);
         b3.setTypeface(tf);
+        TextView c = (TextView) findViewById(R.id.credits);
+        c.setTypeface(tf);
     }
     public void playMap(View v){
         Intent intent = new Intent(this, PlayMap.class);

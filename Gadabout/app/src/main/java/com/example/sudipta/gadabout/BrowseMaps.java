@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -38,6 +39,7 @@ public class BrowseMaps extends AppCompatActivity {
         setContentView(R.layout.activity_browse_maps);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
         Button b2 = (Button) findViewById(R.id.load);
@@ -59,6 +61,7 @@ public class BrowseMaps extends AppCompatActivity {
                 System.out.println(index);
             }
         });
+        lv.requestFocus();
     }
 
     public void back(View v) {
@@ -72,17 +75,12 @@ public class BrowseMaps extends AppCompatActivity {
         DatabaseHandler db = new DatabaseHandler(this);
         ArrayList<TreasureMap> allMaps = db.getAllMaps();
         TreasureMap curr_map = allMaps.get(index);
-        ArrayList<String> clue_desc = curr_map.get_clue_desc();
-        ArrayList<LatLng> clue_locs = curr_map.get_clue_latlng();
+        ArrayList<String> clues = curr_map.get_all_clue();
         String clueAll = "";
-        String locsAll = "";
-        for (String cd : clue_desc) {
-            clueAll += cd + ",";
+        for (String c : clues){
+            clueAll += c + ",";
         }
-        for (LatLng cl : clue_locs) {
-            locsAll += cl.latitude + ";" + cl.longitude + ",";
-        }
-        String output = curr_map.get_map_name() + ":" + curr_map.get_map_desc() + ":" + clueAll + ":" + locsAll;
+        String output = curr_map.get_map_name() + ":" + curr_map.get_map_desc() + ":" + clueAll;
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("vnd.android.cursor.dir/email");
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "GADABOUT MAP - " + curr_map.get_map_name());
@@ -97,25 +95,22 @@ public class BrowseMaps extends AppCompatActivity {
         String mapName = components[0];
         String madDesc = components[1];
         String[]cluesArr = components[2].split(",");
-        String[]locsArr = components[3].split(",");
-        for (String l : locsArr){
-            System.out.println(l);
-        }
+
         DatabaseHandler db = new DatabaseHandler(this);
        //db.clearTable();
         db.addMap(new TreasureMap(mapName,
                 madDesc,
-                cluesArr[0] +";"+ locsArr[0],
-                cluesArr[1] +";"+ locsArr[1],
-                cluesArr[2] +";"+ locsArr[2],
-                cluesArr[3] +";"+ locsArr[3],
-                cluesArr[4] +";"+ locsArr[4]
+                cluesArr[0],
+                cluesArr[1],
+                cluesArr[2],
+                cluesArr[3],
+                cluesArr[4]
                 ));
-        System.out.println("Here");
         ArrayList<TreasureMap> allMaps = db.getAllMaps();
         ArrayAdapter<TreasureMap> adapter;
         adapter = new ArrayAdapter<TreasureMap>(this,android.R.layout.simple_list_item_1, allMaps);
         lv = (ListView) findViewById(R.id.listView);
         lv.setAdapter(adapter);
+        Toast.makeText(this, mapName +" has been added!", Toast.LENGTH_SHORT).show();
     }
 }

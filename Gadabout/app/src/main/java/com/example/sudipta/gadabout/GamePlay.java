@@ -141,7 +141,7 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
             currClue = 0;
             b.setEnabled(false);
             Intent intent = new Intent(this, DoneGame.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
     }

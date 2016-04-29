@@ -130,13 +130,39 @@ public class TreasureMap implements Serializable{
     }
 
     public ArrayList<String> get_all_clue(){
-        ArrayList<String> clue_desc = new ArrayList<String>();
-        clue_desc.add(this._clue0.split(";")[0]);
-        clue_desc.add(this._clue1.split(";")[0]);
-        clue_desc.add(this._clue2.split(";")[0]);
-        clue_desc.add(this._clue3.split(";")[0]);
-        clue_desc.add(this._clue4.split(";")[0]);
-        return clue_desc;
+        ArrayList<String> clue_descs = new ArrayList<String>();
+        if (!this._clue0.equals("not set")){
+            clue_descs.add(this._clue0);
+        }
+        else{
+            clue_descs.add("not set");
+        }
+        if (!this._clue1.equals("not set")){
+            clue_descs.add(this._clue1);
+        }
+        else{
+            clue_descs.add("not set");
+        }
+        if (!this._clue2.equals("not set")){
+            clue_descs.add(this._clue2);
+        }
+        else{
+            clue_descs.add("not set");
+        }
+        if (!this._clue3.equals("not set")){
+            clue_descs.add(this._clue3);
+        }
+        else{
+            clue_descs.add("not set");
+        }
+        if (!this._clue4.equals("not set")){
+            clue_descs.add(this._clue4);
+        }
+        else{
+            clue_descs.add("not set");
+        }
+
+        return clue_descs;
     }
 
     public ArrayList<String> get_clue_desc(){

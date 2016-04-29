@@ -63,6 +63,10 @@ public class PlayMap extends AppCompatActivity {
         b2.setTypeface(tf);
         Button b3 = (Button) findViewById(R.id.back);
         b3.setTypeface(tf);
+        TextView score = (TextView) findViewById(R.id.score);
+        score.setTypeface(tf);
+
+        score.setText("Earn Gadabout coins with every map you finish!");
 
         // Resume game if started
         resumeGame();

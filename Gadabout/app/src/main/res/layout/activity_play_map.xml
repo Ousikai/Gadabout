@@ -18,6 +18,14 @@
         android:maxHeight="750dp"
         android:scaleType="fitCenter" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="5"
+        android:id="@+id/score"
+        android:text = "Your current score is 0 coins. Play more maps to get a higher score!"
+        android:textColor="#000000"/>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0px"
