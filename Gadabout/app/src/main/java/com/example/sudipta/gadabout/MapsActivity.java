@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.Manifest;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -64,6 +65,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 addMark();
             }
         });
+
+        //Stop keyboard from popping up each time the activity opens
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         // Set fancy font!
         Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");

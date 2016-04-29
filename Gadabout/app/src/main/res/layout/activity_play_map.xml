@@ -17,7 +17,7 @@
         android:maxWidth="750dp"
         android:maxHeight="750dp"
         android:scaleType="fitCenter" />
-    
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0px"
