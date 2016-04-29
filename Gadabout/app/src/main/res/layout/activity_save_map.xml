@@ -20,7 +20,19 @@
         android:layout_weight="10"
         android:id="@+id/editText2"
         android:hint="Write the name of your map here."
-        android:textColorHint="#DCDCDC" />
+        android:textColorHint="#DCDCDC"
+        android:textColor="@color/black"
+        android:textColorLink="#000000"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="20"
+        android:id="@+id/mapDesc"
+        android:hint="Write a description of your map here."
+        android:textColorHint="#DCDCDC"
+        android:textColor="@color/black"
+        android:textColorLink="#000000"/>
 
     <TextView
         android:layout_width="match_parent"

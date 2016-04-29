@@ -116,4 +116,10 @@ public class TreasureMap implements Serializable{
         return clue_latng;
     }
 
+    public void setAnyClue(int clueNum, String clueStr){
+        if (clueNum==0) {this.set_clue0(clueStr);}
+        else if (clueNum==1){this.set_clue1(clueStr);}
+        else if (clueNum==2){this.set_clue2(clueStr);}
+    }
+
 }

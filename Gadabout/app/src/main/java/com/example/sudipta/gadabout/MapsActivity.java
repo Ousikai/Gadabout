@@ -41,9 +41,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Set up Treasure Map object for submitting into database
     private int clue_limit = 0;
     private ArrayList<String> clue_desc = new ArrayList<String>();
-    TreasureMap newMap = new TreasureMap("pending", "pending", "pending", "pending", "pending");
+    TreasureMap newMap = new TreasureMap("not set","not set","not set","not set","not set");
 
     private double[] curPos = {0,0};
+    private double[] lastPos = {0,0};
     private ArrayList<LatLng> allPos = new ArrayList<LatLng>();
     private MarkerOptions options = new MarkerOptions();
 
@@ -88,10 +89,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(intent);
     }
     public void saveMap(View v){
-        Intent intent = new Intent(this, SaveMap.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        intent.putExtra("savedMap", newMap);
-        startActivity(intent);
+        if (newMap.get_clue0().equals("not set")){
+            Toast.makeText(this, "Set one clue before saving the map!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Intent intent = new Intent(this, SaveMap.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            intent.putExtra("savedMap", newMap);
+            startActivity(intent);
+        }
     }
 
 
@@ -154,39 +160,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
-    public void pingCurrentLocation(){
-        //Currently pending
-    }
-
     public void addMark(){
-        if (clue_limit==0){
-            EditText txt = (EditText)findViewById(R.id.editText);
-            clue_desc.add(txt.getText().toString());
-            newMap.set_clue0(txt.getText().toString() + ";" + curPos[0] + ";" + curPos[1]);
-            allPos.add(new LatLng(curPos[0], curPos[1]));
-            //System.out.println(newMap.get_clue0());
-            mMap.clear();
-            addAll();
-            txt.setText("");
-            clue_limit++;}
-        else if (clue_limit==1){
-            EditText txt = (EditText)findViewById(R.id.editText);
-            clue_desc.add(txt.getText().toString());
-            newMap.set_clue1(txt.getText().toString() + ";" + curPos[0] + ";" + curPos[1]);
+        EditText txt = (EditText)findViewById(R.id.editText);
+        String clueText= txt.getText().toString();
+        if (!clueText.equals("")&&curPos[0]!=lastPos[0]&&curPos[1]!=lastPos[1]){
+            clue_desc.add(clueText);
+            String setClueStr = clueText + ";" + curPos[0] + ";" + curPos[1];
+            newMap.setAnyClue(clue_limit, setClueStr);
             allPos.add(new LatLng(curPos[0], curPos[1]));
             mMap.clear();
             addAll();
             txt.setText("");
-            clue_limit++;}
-        else if (clue_limit==2){
-            EditText txt = (EditText)findViewById(R.id.editText);
-            clue_desc.add(txt.getText().toString());
-            newMap.set_clue2(txt.getText().toString() + ";" + curPos[0] + ";" + curPos[1]);
-            allPos.add(new LatLng(curPos[0], curPos[1]));
-            mMap.clear();
-            addAll();
-            txt.setText("");
-            clue_limit++;}
+            clue_limit++;
+            lastPos[0]=curPos[0];
+            lastPos[1]=curPos[1];
+        }
+        else{
+            if (clueText.equals("")){
+                Toast.makeText(this, "Write a hint for your clue!", Toast.LENGTH_SHORT).show();}
+            else if (curPos[0]==0&&curPos[1]==0){
+                Toast.makeText(this, "Choose a set of coordinates!", Toast.LENGTH_SHORT).show();}
+            else{
+                Toast.makeText(this, "Choose a different set of coordinates!", Toast.LENGTH_SHORT).show();}
+        }
     }
 
     public void addAll(){
