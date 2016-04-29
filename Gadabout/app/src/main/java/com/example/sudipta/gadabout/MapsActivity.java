@@ -42,7 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //Set up Treasure Map object for submitting into database
     private int clue_limit = 0;
     private ArrayList<String> clue_desc = new ArrayList<String>();
-    TreasureMap newMap = new TreasureMap("not set","not set","not set","not set","not set");
+    TreasureMap newMap = new TreasureMap("not set","not set","not set","not set","not set","not set","not set");
 
     private double[] curPos = {0,0};
     private double[] lastPos = {0,0};
@@ -164,7 +164,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void addMark(){
         EditText txt = (EditText)findViewById(R.id.editText);
         String clueText= txt.getText().toString();
-        if (!clueText.equals("")&&curPos[0]!=lastPos[0]&&curPos[1]!=lastPos[1]){
+        if (!clueText.equals("")&&curPos[0]!=lastPos[0]&&curPos[1]!=lastPos[1]&&(clue_limit<5)){
             clue_desc.add(clueText);
             String setClueStr = clueText + ";" + curPos[0] + ";" + curPos[1];
             newMap.setAnyClue(clue_limit, setClueStr);
@@ -175,9 +175,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             clue_limit++;
             lastPos[0]=curPos[0];
             lastPos[1]=curPos[1];
+            Toast.makeText(this, "Clue added!", Toast.LENGTH_SHORT).show();
         }
         else{
-            if (clueText.equals("")){
+            if (clue_limit==5){
+                Toast.makeText(this, "You have set the max amount of clues!", Toast.LENGTH_SHORT).show();}
+            else if (clueText.equals("")){
                 Toast.makeText(this, "Write a hint for your clue!", Toast.LENGTH_SHORT).show();}
             else if (curPos[0]==0&&curPos[1]==0){
                 Toast.makeText(this, "Choose a set of coordinates!", Toast.LENGTH_SHORT).show();}

@@ -95,6 +95,7 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         tv4.setTypeface(tf);
         Button b1 = (Button) findViewById(R.id.help);
         b1.setTypeface(tf);
+
         Button b3 = (Button) findViewById(R.id.next);
         b3.setTypeface(tf);
         Button b4 = (Button) findViewById(R.id.back);
@@ -102,7 +103,7 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         //END SET FONTS
 
         b = (Button) findViewById(R.id.next);
-        b.setEnabled(true);
+        b.setEnabled(false);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling

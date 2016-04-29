@@ -41,20 +41,6 @@ public class PlayMap extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listView);
 
         db = new DatabaseHandler(this);
-/*        db.clearTable();
-        // Fill database with pre-loaded maps
-        TreasureMap coolMap = new TreasureMap("Down Newcomb Road",
-                "Cool clue desc!!",
-                "Newcomb Road;38.033751;-78.508423",
-                "Bridge;38.034872;-78.508171",
-                "Bookstore Hill;38.035335;-78.507634");
-        db.addMap(coolMap);*/
-//        db.addMap(new TreasureMap("Engineers Waverly",
-//                "Cool clue desc!!",
-//                "Newcomb Road;38.033751;-78.508423",
-//                "Bridge;38.034872;-78.508171",
-//                "Bookstore Hill;38.035335;-78.507634"));
-
         //Set up ArrayAdapter
         allMaps = db.getAllMaps();
         adapter = new ArrayAdapter<TreasureMap>(this,android.R.layout.simple_list_item_1, allMaps);
@@ -65,6 +51,7 @@ public class PlayMap extends AppCompatActivity {
                 index = position;
                 System.out.println(index);
                 selectedMap = allMaps.get(index);
+
             }
         });
 
@@ -81,6 +68,16 @@ public class PlayMap extends AppCompatActivity {
         resumeGame();
     }
     public void back(View v){
+/*       if (selectedMap!=null) {
+            String allSites = "";
+            allSites+=selectedMap.get_clue0()+"\n";
+            allSites+=selectedMap.get_clue1()+"\n";
+            allSites+=selectedMap.get_clue2()+"\n";
+            allSites+=selectedMap.get_clue3()+"\n";
+            allSites+=selectedMap.get_clue4()+"\n";
+            Toast.makeText(this, allSites, Toast.LENGTH_SHORT).show();
+        }*/
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

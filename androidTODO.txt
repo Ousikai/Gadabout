@@ -1,16 +1,11 @@
-oscar:
--enable clues for less than 10
--clean up ugly comments
-
 Final Tests:
--1 full run
--1 partial run
 -Email (share and load)
 
 Maybe: 
+-sort maps by title
 -show highscore on MainActivity
 -camera
 -stop going back to user location while scrolling
 
-commit "flipped yes/no dialog for resume game, got rid of I GIVE UP button, added GUI to Load and Share"
+commit "can now create up to 5 clues per map!"
 

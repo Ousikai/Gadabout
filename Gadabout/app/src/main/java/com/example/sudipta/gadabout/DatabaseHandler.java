@@ -16,7 +16,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
     private static final String DATABASE_NAME = "maps_database";
@@ -30,6 +30,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_CLUE0 = "clue0";
     private static final String KEY_CLUE1 = "clue1";
     private static final String KEY_CLUE2 = "clue2";
+    private static final String KEY_CLUE3 = "clue3";
+    private static final String KEY_CLUE4 = "clue4";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -44,7 +46,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_MAP_DESC + " TEXT,"
                 + KEY_CLUE0    + " TEXT,"
                 + KEY_CLUE1 + " TEXT,"
-                + KEY_CLUE2 + " TEXT"
+                + KEY_CLUE2 + " TEXT,"
+                + KEY_CLUE3 + " TEXT,"
+                + KEY_CLUE4 + " TEXT"
                 + ")";
         db.execSQL(CREATE_MAPS_TABLE);
     }
@@ -72,6 +76,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_CLUE0, treasureMap.get_clue0());
         values.put(KEY_CLUE1, treasureMap.get_clue1());
         values.put(KEY_CLUE2, treasureMap.get_clue2());
+        values.put(KEY_CLUE3, treasureMap.get_clue3());
+        values.put(KEY_CLUE4, treasureMap.get_clue4());
 
         // Inserting Row
         db.insert(TABLE_TREASUREMAP, null, values);
@@ -95,7 +101,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(2), // map desc
                 cursor.getString(3), //clue0
                 cursor.getString(4), //clue1
-                cursor.getString(5) //clue2
+                cursor.getString(5), //clue2
+                cursor.getString(6), //clue3
+                cursor.getString(7)  //clue4
                 );
         // return map
         return treasureMap;
@@ -117,7 +125,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         cursor.getString(2), // map desc
                         cursor.getString(3), //clue0
                         cursor.getString(4), //clue1
-                        cursor.getString(5) //clue2
+                        cursor.getString(5), //clue2
+                        cursor.getString(6), //clue3
+                        cursor.getString(7)  //clue4
                 ));
             } while (cursor.moveToNext());
         }
@@ -135,6 +145,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_CLUE0, treasureMap.get_clue0());
         values.put(KEY_CLUE1, treasureMap.get_clue1());
         values.put(KEY_CLUE2, treasureMap.get_clue2());
+        values.put(KEY_CLUE3, treasureMap.get_clue3());
+        values.put(KEY_CLUE4, treasureMap.get_clue4());
 
         // updating row
         return db.update(TABLE_TREASUREMAP, values, KEY_ID + " = ?",

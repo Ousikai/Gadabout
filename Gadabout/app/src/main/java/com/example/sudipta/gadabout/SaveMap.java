@@ -29,11 +29,13 @@ public class SaveMap extends AppCompatActivity {
         clues.setMovementMethod(new ScrollingMovementMethod());
         //Intent i = getIntent();
         savedMap = (TreasureMap)getIntent().getSerializableExtra("savedMap");
-        ArrayList<String> clue_desc = savedMap.get_clue_desc();
+        ArrayList<String> clue_desc = savedMap.get_all_clue();
         String clueDisplay = "YOUR CLUES:\n";
         clueDisplay+="Clue 01: "+ clue_desc.get(0) +"\n";
         clueDisplay+="Clue 02: "+ clue_desc.get(1) +"\n";
         clueDisplay+="Clue 03: "+ clue_desc.get(2) +"\n";
+        clueDisplay+="Clue 04: "+ clue_desc.get(3) +"\n";
+        clueDisplay+="Clue 05: "+ clue_desc.get(4) +"\n";
         clues.setText(clueDisplay);
 
         // Set fancy fonts!

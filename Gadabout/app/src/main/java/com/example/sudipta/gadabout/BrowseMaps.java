@@ -107,7 +107,10 @@ public class BrowseMaps extends AppCompatActivity {
                 madDesc,
                 cluesArr[0] +";"+ locsArr[0],
                 cluesArr[1] +";"+ locsArr[1],
-                cluesArr[2] +";"+ locsArr[2]));
+                cluesArr[2] +";"+ locsArr[2],
+                cluesArr[3] +";"+ locsArr[3],
+                cluesArr[4] +";"+ locsArr[4]
+                ));
         System.out.println("Here");
         ArrayList<TreasureMap> allMaps = db.getAllMaps();
         ArrayAdapter<TreasureMap> adapter;
