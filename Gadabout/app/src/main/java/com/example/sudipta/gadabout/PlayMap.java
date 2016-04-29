@@ -27,7 +27,8 @@ public class PlayMap extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_map);
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         lv = (ListView) findViewById(R.id.listView);
 
         DatabaseHandler db = new DatabaseHandler(this);
@@ -56,24 +57,14 @@ public class PlayMap extends AppCompatActivity {
                 System.out.println(index);
             }
         });
-/*       TreasureMap test1 = allMaps.get(0);
-        ArrayList<String> testStr = test1.get_clue_desc();
-        ArrayList<LatLng> testLatLng = test1.get_clue_latlng();
-        for (int i=0;i<3;i++){
-            System.out.print(testStr.get(i));
-            System.out.println(testLatLng.get(i));
-        }*/
+        //lv.requestFocus();
 
         // Set fancy fonts!
         Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
-        Button b1 = (Button) findViewById(R.id.button4);
-        b1.setTypeface(tf);
         Button b2 = (Button) findViewById(R.id.play);
         b2.setTypeface(tf);
         Button b3 = (Button) findViewById(R.id.back);
         b3.setTypeface(tf);
-        EditText et= (EditText) findViewById(R.id.editText);
-        et.setTypeface(tf);
     }
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);

@@ -3,15 +3,18 @@ oscar:
 -fix set to front views (delete activities when you're done)
 -Get keyboard to stop pushing screen up
 -parsing online text data
+-add "delete map button" to PlayMap
+-clean up ugly comments
 
 
 sudipta:
 -get SavedGame to work
 - Handle rotation
--app interrupt (i.e. incoming call) correctly
 	- saved bundle data on these actions
 -email
 -camera
 
-
+Either:
+-Map Title Text shows up in white
+-search button?
 
