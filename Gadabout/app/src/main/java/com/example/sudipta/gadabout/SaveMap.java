@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -53,12 +54,26 @@ public class SaveMap extends AppCompatActivity {
         startActivity(intent);
     }
     public void save(View v){
-        EditText mapName = (EditText)findViewById(R.id.editText2);
-        savedMap.set_map_name(mapName.getText().toString());
-        DatabaseHandler db = new DatabaseHandler(this);
-        db.addMap(savedMap);
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        startActivity(intent);
+        EditText mapNameET = (EditText)findViewById(R.id.editText2);
+        EditText mapDescET = (EditText)findViewById(R.id.mapDesc);
+        String mapName = mapNameET.getText().toString();
+        String mapDesc = mapDescET.getText().toString();
+        if (!mapName.equals("")&&!mapDesc.equals("")){
+            savedMap.set_map_name(mapName);
+            savedMap.set_map_desc(mapDesc);
+            DatabaseHandler db = new DatabaseHandler(this);
+            db.addMap(savedMap);
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+        }
+        else{
+            if(mapName.equals("")){
+                Toast.makeText(this, "Write a map name!", Toast.LENGTH_SHORT).show();
+            }
+            else if(mapDesc.equals("")){
+                Toast.makeText(this, "Write a map description!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
