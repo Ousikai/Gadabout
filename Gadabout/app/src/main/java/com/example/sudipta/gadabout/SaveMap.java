@@ -50,7 +50,7 @@ public class SaveMap extends AppCompatActivity {
 
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     public void save(View v){
@@ -63,8 +63,9 @@ public class SaveMap extends AppCompatActivity {
             savedMap.set_map_desc(mapDesc);
             DatabaseHandler db = new DatabaseHandler(this);
             db.addMap(savedMap);
+            Toast.makeText(this, "New map saved!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
         else{
@@ -75,5 +76,12 @@ public class SaveMap extends AppCompatActivity {
                 Toast.makeText(this, "Write a map description!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

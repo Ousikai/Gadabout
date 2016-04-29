@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,15 +76,18 @@ public class PlayMap extends AppCompatActivity {
         b2.setTypeface(tf);
         Button b3 = (Button) findViewById(R.id.back);
         b3.setTypeface(tf);
+
+        // Resume game if started
+        resumeGame();
     }
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
     public void playGame(View v){
         Intent intent = new Intent(this, GamePlay.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         intent.putExtra("index", index);
         startActivity(intent);
     }
@@ -117,5 +121,53 @@ public class PlayMap extends AppCompatActivity {
             alert.show();
         }
     }
+    public void resumeGame(){
+        SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        if (settings.getBoolean("saved", false)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+            builder.setTitle("Resume Game?");
+            builder.setMessage("Hello traveler! Would like to pick up where you left off on your last quest?");
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = settings.edit();
+                    int i = settings.getInt("saved_map", -1);
+                    int c = settings.getInt("saved_clue", 0);
+                    editor.putInt("saved_map", -1);
+                    editor.putInt("saved_clue", 0);
+                    editor.putBoolean("saved", false);
+                    editor.commit();
+                    Intent intent = new Intent(PlayMap.this, GamePlay.class);
+                    intent.putExtra("saved_index", i);
+                    intent.putExtra("saved_clue", c);
+                    intent.putExtra("saved", true);
+                    startActivity(intent);
+                    dialog.dismiss();
+                }
+
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("saved_map", -1);
+                    editor.putInt("saved_clue", 0);
+                    editor.putBoolean("saved", false);
+                    editor.commit();
+                    System.out.println("Main act in saved: " + settings.getBoolean("saved", true));
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
 }

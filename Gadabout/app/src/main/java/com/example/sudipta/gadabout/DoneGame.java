@@ -24,7 +24,7 @@ public class DoneGame extends AppCompatActivity {
         Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
         TextView tv1 = (TextView) findViewById(R.id.textView4);
         tv1.setTypeface(tf);
-        Button b1 = (Button) findViewById(R.id.back);
+        Button b1 = (Button) findViewById(R.id.next);
         b1.setTypeface(tf);
 
         // Update High Score
@@ -42,7 +42,7 @@ public class DoneGame extends AppCompatActivity {
     }
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }

@@ -26,72 +26,29 @@ public class MainActivity extends AppCompatActivity {
         b2.setTypeface(tf);
         Button b3 = (Button) findViewById(R.id.button3);
         b3.setTypeface(tf);
-
-        resumeGame();
     }
     public void playMap(View v){
         Intent intent = new Intent(this, PlayMap.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
     public void browseMaps(View v){
         Intent intent = new Intent(this, BrowseMaps.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
     public void createMap(View v){
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
-    public void resumeGame(){
-        SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-        if (settings.getBoolean("saved", false)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    // dEBUGGING high score
+/*    public void testDone(View v){
+        Intent intent = new Intent(this, DoneGame.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }*/
 
-            builder.setTitle("Resume Game?");
-            builder.setMessage("Hello traveler! Would like to pick up where you left off on your last quest?");
 
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int which) {
-                    SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = settings.edit();
-                    int i = settings.getInt("saved_map", -1);
-                    int c = settings.getInt("saved_clue", 0);
-                    editor.putInt("saved_map", -1);
-                    editor.putInt("saved_clue", 0);
-                    editor.putBoolean("saved", false);
-                    editor.commit();
-                    Intent intent = new Intent(MainActivity.this, GamePlay.class);
-                    intent.putExtra("saved_index", i);
-                    intent.putExtra("saved_clue", c);
-                    intent.putExtra("saved", true);
-                    startActivity(intent);
-                    dialog.dismiss();
-                }
-
-            });
-
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("saved_map", -1);
-                    editor.putInt("saved_clue", 0);
-                    editor.putBoolean("saved", false);
-                    editor.commit();
-                    System.out.println("Main act in saved: " + settings.getBoolean("saved", true));
-                    dialog.dismiss();
-                }
-            });
-
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
-    }
 }
