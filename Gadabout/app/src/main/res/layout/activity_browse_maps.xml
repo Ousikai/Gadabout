@@ -12,14 +12,17 @@
         android:layout_height="0px"
         android:layout_weight="30"
         android:id="@+id/imageView5"
-        android:src="@drawable/browse" />
+        android:src="@drawable/loadandshare" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:layout_weight="30"
         android:id="@+id/editText"
-        android:textColor="#000000"/>
+        android:hint="Enter your map text here."
+        android:textColorHint="#DCDCDC"
+        android:textColor="@color/black"
+        android:textColorLink="#000000"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,6 +60,21 @@
             android:onClick="send"
             android:layout_weight="1"
             android:text="SEND MAP" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="10"
+        android:id="@+id/linear4">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="back"
+            android:layout_weight="1"
+            android:text="BACK TO MENU" />
     </LinearLayout>
 
 </LinearLayout>

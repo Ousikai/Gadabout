@@ -95,8 +95,6 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         tv4.setTypeface(tf);
         Button b1 = (Button) findViewById(R.id.help);
         b1.setTypeface(tf);
-        Button b2 = (Button) findViewById(R.id.giveup);
-        b2.setTypeface(tf);
         Button b3 = (Button) findViewById(R.id.next);
         b3.setTypeface(tf);
         Button b4 = (Button) findViewById(R.id.back);

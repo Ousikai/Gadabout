@@ -130,8 +130,7 @@ public class PlayMap extends AppCompatActivity {
             builder.setTitle("Resume Game?");
             builder.setMessage("Hello traveler! Would like to pick up where you left off on your last quest?");
 
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
+            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = settings.edit();
@@ -151,8 +150,7 @@ public class PlayMap extends AppCompatActivity {
 
             });
 
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
+            builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     SharedPreferences settings = getSharedPreferences("mysettings", Context.MODE_PRIVATE);

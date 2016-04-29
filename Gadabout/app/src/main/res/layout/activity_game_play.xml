@@ -83,13 +83,6 @@
             android:layout_weight="1"
             android:onClick="helpMe"
             android:text="HELP ME!" />
-        <Button
-            android:id="@+id/giveup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="giveUp"
-            android:text="I GIVE UP!" />
 
         <Button
             android:id="@+id/next"
