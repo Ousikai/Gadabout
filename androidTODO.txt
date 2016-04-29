@@ -1,7 +1,6 @@
 oscar:
 -enable clues for less than 10
 -fix set to front views (delete activities when you're done)
--parsing online text data
 -add "delete map button" to PlayMap
 -clean up ugly comments
 
@@ -9,9 +8,14 @@ oscar:
 sudipta:
 - Handle rotation
 	- saved bundle data on these actions
--email
+-email 
 -camera
 
 Either:
 -Map Title Text shows up in white
+
+Final Tests:
+-1 run
+-High Scores
+-Email (share and load)
 

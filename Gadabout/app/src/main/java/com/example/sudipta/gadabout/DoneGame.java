@@ -35,9 +35,10 @@ public class DoneGame extends AppCompatActivity {
         preferenceEditor = preferenceSettings.edit();
         preferenceEditor.putInt("high_score", high_score);
         preferenceEditor.commit();
-        int test_high_score = preferenceSettings.getInt("high_score",0);
-        System.out.println("New High Score: " + test_high_score);
+        int new_high_score = preferenceSettings.getInt("high_score",0);
+        System.out.println("New High Score: " + new_high_score);
 
+        tv1.setText("YOUR TOTAL: " + new_high_score + " Coins");
     }
     public void back(View v){
         Intent intent = new Intent(this, MainActivity.class);
