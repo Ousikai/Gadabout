@@ -1,5 +1,8 @@
 package com.example.sudipta.gadabout;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -21,8 +24,13 @@ import java.util.List;
 
 public class PlayMap extends AppCompatActivity {
     ListView lv;
+    ArrayList<TreasureMap> allMaps;
     ArrayAdapter<TreasureMap> adapter;
     int index;
+    DatabaseHandler db;
+    TreasureMap selectedMap;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +39,7 @@ public class PlayMap extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         lv = (ListView) findViewById(R.id.listView);
 
-        DatabaseHandler db = new DatabaseHandler(this);
+        db = new DatabaseHandler(this);
 /*        db.clearTable();
         // Fill database with pre-loaded maps
         TreasureMap coolMap = new TreasureMap("Down Newcomb Road",
@@ -47,7 +55,7 @@ public class PlayMap extends AppCompatActivity {
 //                "Bookstore Hill;38.035335;-78.507634"));
 
         //Set up ArrayAdapter
-        ArrayList<TreasureMap> allMaps = db.getAllMaps();
+        allMaps = db.getAllMaps();
         adapter = new ArrayAdapter<TreasureMap>(this,android.R.layout.simple_list_item_1, allMaps);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -55,12 +63,14 @@ public class PlayMap extends AppCompatActivity {
                                     int position, long id) {
                 index = position;
                 System.out.println(index);
+                selectedMap = allMaps.get(index);
             }
         });
-        //lv.requestFocus();
 
         // Set fancy fonts!
         Typeface tf = Typeface.createFromAsset(getAssets(), "exo.otf");
+        Button b1 = (Button) findViewById(R.id.delete);
+        b1.setTypeface(tf);
         Button b2 = (Button) findViewById(R.id.play);
         b2.setTypeface(tf);
         Button b3 = (Button) findViewById(R.id.back);
@@ -76,6 +86,36 @@ public class PlayMap extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("index", index);
         startActivity(intent);
+    }
+
+    public void delete(View v) {
+        if (selectedMap!=null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Delete Map");
+            builder.setMessage("Do you give up on this finding these treasures? " +
+                    "There may never be a chance to find it again!");
+
+            builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("Picked no");
+                    dialog.dismiss();
+                }
+            });
+
+            builder.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    System.out.println("Picked YES");
+                    //DatabaseHandler db = new DatabaseHandler(this);
+                    //TreasureMap noMore = allMaps.get(index);
+                    db.deleteMap(selectedMap);
+                    recreate();
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
 }

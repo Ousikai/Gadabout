@@ -104,7 +104,7 @@ public class GamePlay extends AppCompatActivity implements LocationListener, Sen
         //END SET FONTS
 
         b = (Button) findViewById(R.id.next);
-        b.setEnabled(false);
+        b.setEnabled(true);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling

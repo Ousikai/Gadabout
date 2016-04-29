@@ -34,12 +34,12 @@
         android:id="@+id/linear2">
 
         <Button
-            android:id="@+id/back"
+            android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="BACK TO MENU"
-            android:onClick="back"/>
+            android:text="DELETE MAP"
+            android:onClick="delete"/>
 
         <Button
             android:id="@+id/play"
@@ -48,6 +48,22 @@
             android:onClick="playGame"
             android:layout_weight="1"
             android:text="PLAY MAP" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="10"
+        android:id="@+id/linear3">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="BACK TO MENU"
+            android:onClick="back"/>
+
     </LinearLayout>
 
 </LinearLayout>

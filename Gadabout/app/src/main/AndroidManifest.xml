@@ -22,13 +22,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlayMap">
-        </activity>
-        <activity android:name=".GamePlay" />
-        <activity android:name=".DoneGame" />
-        <activity android:name=".BrowseMaps" />
-        <activity android:name=".CreateMap" />
-        <activity android:name=".SaveMap" />
+        <activity android:name=".PlayMap"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".GamePlay"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".DoneGame"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".BrowseMaps"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".CreateMap"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".SaveMap"
+            android:configChanges="orientation|screenSize"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -43,7 +48,15 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps"
+            android:configChanges="orientation|screenSize">
+        </activity>
     </application>
+    <supports-screens android:resizeable="true"
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+
+        android:anyDensity="true" />
 
 </manifest>

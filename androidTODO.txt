@@ -1,18 +1,16 @@
 oscar:
 -enable clues for less than 10
 -fix set to front views (delete activities when you're done)
--add "delete map button" to PlayMap
 -clean up ugly comments
+-prevent clue creation unless edit text has, uh, text...
 
 
 sudipta:
-- Handle rotation
-	- saved bundle data on these actions
--email 
 -camera
 
 Either:
 -Map Title Text shows up in white
+-stop going back to user location while scrolling
 
 Final Tests:
 -1 run
